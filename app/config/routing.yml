@@ -1,0 +1,4 @@
+my_survey:
+    resource: "@MySurveyBundle/Controller/"
+    type:     annotation
+    prefix:   /
