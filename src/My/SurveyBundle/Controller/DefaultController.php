@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -25,11 +26,17 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-
-            return new JsonResponse()
         }
 
         return array('name' => 'test');
+    }
+
+    /**
+     * @Template()
+     */
+    public function countryAction(Request $request)
+    {
+        return array('country' => $request->get('country_alias'));
     }
 
     /**

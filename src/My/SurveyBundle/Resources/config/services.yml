@@ -1,0 +1,6 @@
+services:
+    kernel.listener.country_listener:
+        class: My\SurveyBundle\EventListener\CountryListener
+        arguments: [ @router, @maxmind.geoip ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

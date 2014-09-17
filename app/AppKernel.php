@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new My\SurveyBundle\MySurveyBundle(),
+            new Maxmind\Bundle\GeoipBundle\MaxmindGeoipBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
