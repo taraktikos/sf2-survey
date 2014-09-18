@@ -12,3 +12,5 @@
 
 /.idea/
 *~
+/web/data/*
+!web/data/.gitkeep

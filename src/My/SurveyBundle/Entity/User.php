@@ -31,7 +31,7 @@ class User
      * @ORM\Column(name="first_name", type="string", length=255)
      * @Assert\NotBlank()
      */
-    protected $firsName;
+    protected $firstName;
 
     /**
      * @var string
@@ -68,6 +68,19 @@ class User
     protected $shoeSize;
 
     /**
+     * @ORM\OneToOne(targetEntity="Survey", mappedBy="user")
+     */
+    protected $survey;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip", type="string", length=45)
+     * @Assert\NotBlank()
+     */
+    protected $ip;
+
+    /**
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;
@@ -88,26 +101,26 @@ class User
     }
 
     /**
-     * Set firsName
+     * Set firstName
      *
      * @param string $firsName
      * @return User
      */
-    public function setFirsName($firsName)
+    public function setFirstName($firstName)
     {
-        $this->firsName = $firsName;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
     /**
-     * Get firsName
+     * Get firstName
      *
      * @return string 
      */
-    public function getFirsName()
+    public function getFirstName()
     {
-        return $this->firsName;
+        return $this->firstName;
     }
 
     /**
@@ -263,5 +276,51 @@ class User
     public function setUpdatedAtToNow()
     {
         $this->updatedAt = new \DateTime("now");
+    }
+
+    /**
+     * Set survey
+     *
+     * @param \My\SurveyBundle\Entity\Survey $survey
+     * @return User
+     */
+    public function setSurvey(\My\SurveyBundle\Entity\Survey $survey = null)
+    {
+        $this->survey = $survey;
+
+        return $this;
+    }
+
+    /**
+     * Get survey
+     *
+     * @return \My\SurveyBundle\Entity\Survey 
+     */
+    public function getSurvey()
+    {
+        return $this->survey;
+    }
+
+    /**
+     * Set ip
+     *
+     * @param string $ip
+     * @return User
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    /**
+     * Get ip
+     *
+     * @return string 
+     */
+    public function getIp()
+    {
+        return $this->ip;
     }
 }

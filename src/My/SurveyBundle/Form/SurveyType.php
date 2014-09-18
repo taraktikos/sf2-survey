@@ -18,7 +18,7 @@ class SurveyType extends AbstractType
             ->add('iceCream')
             ->add('superhero')
             ->add('movieStar')
-            ->add('worldEnd')
+            ->add('worldEnd', 'date')
             ->add('superBowlWinner')
         ;
     }
