@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * User
  *
  * @ORM\Table(name="users")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="My\SurveyBundle\Entity\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("email")
  */
@@ -76,7 +76,6 @@ class User
      * @var string
      *
      * @ORM\Column(name="ip", type="string", length=45)
-     * @Assert\NotBlank()
      */
     protected $ip;
 

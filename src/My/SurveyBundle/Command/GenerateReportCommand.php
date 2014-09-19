@@ -20,7 +20,7 @@ class GenerateReportCommand extends ContainerAwareCommand
             ->setDescription('Generate survey report')
             ->addArgument(
                 'email',
-                InputArgument::REQUIRED,
+                InputArgument::OPTIONAL,
                 'Email'
             )
             ->setHelp(<<<EOF
@@ -42,7 +42,7 @@ EOF
         }
 
         $em = $this->getContainer()->get('doctrine');
-        $users = $em->getRepository('MySurveyBundle:User')->findAll();
+        $users = $em->getRepository('MySurveyBundle:User')->findAllFinishedSurveyUsers(new \DateTime());
 
         $file = fopen($file, 'r+');
         fseek($file, -8, SEEK_END);
