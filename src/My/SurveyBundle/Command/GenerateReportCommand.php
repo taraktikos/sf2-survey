@@ -2,6 +2,7 @@
 
 namespace My\SurveyBundle\Command;
 
+use My\SurveyBundle\Service\XmlReport;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -35,47 +36,31 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $email = $input->getArgument('email');
         $file = $this->getContainer()->get('kernel')->getRootDir() . '/../web/data/report.xml';
-        if(!file_exists($file)) {
-            $this->createFile($file);
-        }
+
+        $survey_time = $this->getContainer()->getParameter('survey_time');
+        $startDate = file_exists($file) ? new \DateTime(date('c', filemtime($file))) : null;
+        $endDate = new \DateTime("-$survey_time minutes");
 
         $em = $this->getContainer()->get('doctrine');
-        $users = $em->getRepository('MySurveyBundle:User')->findAllFinishedSurveyUsers(new \DateTime());
+        $users = $em->getRepository('MySurveyBundle:User')->findAllFinishedSurveyUsers($startDate, $endDate);
 
-        $file = fopen($file, 'r+');
-        fseek($file, -8, SEEK_END);
-        foreach($users as $user) {
-            $entry = '<user>'.
-                '<firstName>'.$user->getFirstName().'</firstName>'.
-                '<lastName>'.$user->getLastName().'</lastName>'.
-                '<ip>'.$user->getIp().'</ip>'.
-                '<finished>'.($user->getSurvey() ? 1 : 0).'</finished>'.
-                '<survey>'.
-                    '<question></question>'.
-                    '<answer></answer>'.
-                '</survey>'.
-                '<errors>'.
-                    '<question></question>'.
-                    '<error></error>'.
-                '</errors>'.
-                '</user>'.PHP_EOL;
-            fwrite($file, $entry);
+        $report = new XmlReport($file);
+        $report->generate($users, $endDate->getTimestamp());
+
+        if ($email = $input->getArgument('email')) {
+            $date = new \DateTime('now');
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Report generated')
+                ->setFrom('sf2-survey@yandex.ua')
+                ->setTo($email)
+                ->setBody('Report generated at '.$date->format('Y-m-d H:i:s'))
+            ;
+            $this->getContainer()->get('mailer')->send($message);
         }
-        fwrite($file, '</users>');
-        fclose($file);
-        return $output->writeln("<info>".$email."</info>");
+
+        return $output->writeln("<info>Done</info>");
     }
 
-    private function createFile($file) {
-        $content = <<<EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<users>
-</users>
-EOF;
-        $fp = fopen($file, "wb");
-        fwrite($fp,$content);
-        fclose($fp);
-    }
+
 }

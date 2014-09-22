@@ -13,21 +13,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
-    public function findAllFinishedSurveyUsers($startDate)
+    public function findAllFinishedSurveyUsers($startDate, $endDate)
     {
-        $startDate = new \DateTime('-1 day');
-        $endDate = new \DateTime('-6 minutes');
-
         $q = $this
             ->createQueryBuilder('u')
             ->select('u, s')
             ->leftJoin('u.survey', 's')
-            ->where('u.createdAt BETWEEN :startDate AND :endDate')
-            ->setParameter('startDate', $startDate)
-            ->setParameter('endDate', $endDate)
-            ->getQuery();
+            ->where('u.createdAt < :endDate')
+            ->setParameter('endDate', $endDate);
+        if ($startDate) {
+            $q
+                ->andwhere('u.createdAt > :startDate')
+                ->setParameter('startDate', $startDate);
+        }
 
-
-        return $q->getResult();
+        return $q->getQuery()->getResult();
     }
 }

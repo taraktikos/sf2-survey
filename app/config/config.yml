@@ -66,4 +66,10 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
-    spool:     { type: memory }
+    encryption: %mailer_encryption%
+    auth_mode:  %mailer_auth_mode%
+    password:  %mailer_password%
+
+
+command_lock:
+    pid_directory: "%kernel.root_dir%/cache/command_pid_files"
