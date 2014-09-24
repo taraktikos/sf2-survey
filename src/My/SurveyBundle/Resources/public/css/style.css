@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    font-family: Helvetica, Verdana, Arial, Tahoma, sans-serif;
+}
+html, body {
+    height: 100%;
+    background: url('../img/bg.png');
+}
+.wrapper {
+    min-height: 100%;
+    margin: 0 auto -35px;
+}
+.container {
+    width: 900px;
+    margin: 0 auto;
+}
+#header {
+    background: url("../img/header-bg.png") repeat-x;
+    height: 68px;
+}
+#header .container {
+    width: 990px;
+}
+#header .logo {
+    background-image: url("../img/logo.png");
+    width: 339px;
+    height: 63px;
+    display: block;
+    position: absolute;
+    margin-top: 10px;
+}
+#header ul.menu {
+    margin: 28px 0 0 0;
+    padding: 0;
+    list-style-type: none;
+    float: right;
+}
+
+#header ul.menu li {
+    display: inline;
+    list-style: none;
+}
+#header ul.menu li a {
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: url('../img/menu-left-bg.png') top left no-repeat;
+    margin: 0 5px;
+    padding: 10px 0 10px 8px;
+    font-size: 12px;
+}
+#header ul.menu li a span {
+    background: url('../img/menu-right-bg.png') top right no-repeat;
+    padding: 10px 12px 10px 5px;
+}
+#header ul.menu li a.active, #header ul.menu li a:hover {
+    color: #06a0a5;
+}
+
+.step-block {
+    background-color: #ffffff;
+    border: 1px solid #bbbbbb;
+    margin-top: 40px;
+    position: relative;
+}
+.step-block .step-number {
+    background: url('../img/step-middle-bg.png') top left repeat-x;
+    width: 180px;
+    height: 35px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    margin: -18px 0 0 30px;
+}
+.step-block .step-number span {
+    display: block;
+    padding-top: 10px;
+    width: 180px;
+    float: left;
+}
+.step-block .step-number:before {
+    content: url("../img/step-left-bg.png");
+    position: relative;
+    margin-left: -8px;
+    float: left;
+}
+.step-block .step-number:after {
+    content: url("../img/step-right-bg.png");
+    position: relative;
+    margin-right: -8px;
+    float: right;
+}
+.step-block .step-form {
+    margin: 50px 100px 25px 230px;
+}
+.step-block .step-title {
+    background-color: #7a3d1d;
+    width: 350px;
+    height: 38px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    right: 0;
+    margin-top: -20px;
+}
+.step-block .step-title:before {
+    content: url("../img/step-title-left-bg.png");
+    position: relative;
+    margin-left: -20px;
+    float: left;
+}
+.step-block .step-title:after {
+    content: url("../img/step-title-right-bg.png");
+    position: relative;
+    margin-right: -13px;
+    float: right;
+}
+.step-block .step-title span {
+    display: block;
+    padding-top: 11px;
+    width: 350px;
+    float: left;
+}
+
+#footer, .push {
+    height: 35px;
+}
+#footer {
+    background-color: #2f251b;
+}
+#footer .copyright {
+    text-align: center;
+    color: #ffffff;
+    padding-top: 10px;
+    font-size: 12px;
+}

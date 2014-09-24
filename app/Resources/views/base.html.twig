@@ -3,11 +3,33 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
+        {% stylesheets 'bundles/mysurvey/css/style.css' filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="wrapper">
+            <div id="header">
+                <div class="container">
+                    <a href="{{ path("my_survey_default_index") }}" class="logo"></a>
+                    <ul class="menu">
+                        <li><a href="{{ path("my_survey_default_index") }}" class="active"><span>Happy testers</span></a></li>
+                        <li><a href="#"><span>Status</span></a></li>
+                        <li><a href="#"><span>Invite friends</span></a></li>
+                        <li><a href="#"><span>Today's survey</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="content" class="container">
+                {% block body %}{% endblock %}
+            </div>
+            <div class="push"></div>
+        </div>
+        <div id="footer">
+            <div class="copyright">© Copyright Fancy Survey {{ "now"|date('Y ') }}</div>
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

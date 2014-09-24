@@ -3,10 +3,13 @@
 {% block title %}{% trans %}Fancy Survey{% endtrans %}{% endblock %}
 
 {% block body %}
-    <h1>User creation</h1>
-
-    {{ form(form) }}
-
+    <div class="step-block">
+        <div class="step-number"><span>Step One</span></div>
+        <div class="step-title"><span>Start by giving us all your personal data</span></div>
+        <div class="step-form">
+            {{ form(form) }}
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
